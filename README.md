@@ -1,146 +1,107 @@
 
-# Employee Attrition Risk & Workforce Stability Analysis
+# Employee Attrition Prediction Dashboard
 
-This project develops a probability-based **employee attrition prediction and interpretation system** using the IBM HR Analytics dataset.  
-Rather than treating attrition prediction as a simple classification task, the project focuses on **understanding the underlying drivers** of employee turnover and presenting risk insights in a **transparent, research-oriented, and decision-support format**.
+This project provides an interactive dashboard to understand and predict employee attrition risk. 
+It is designed to support HR departments, managers, and organizational researchers in identifying 
+early signs of employee disengagement and turnover.
 
-The final application is a **Streamlit dashboard** that supports:
-- Single-employee attrition risk assessment
-- Evidence-based interpretation of contributing factors
-- Department-level benchmarking of compensation
-- Batch risk scoring of multiple employees via CSV upload
-- Research-aligned model documentation (Model Card)
+🔗 **Live App:**  
+https://employee-attrition-prediction-pdg6y4uxrqus3beemdt6ms.streamlit.app/
 
 ---
 
-## 1. Problem Context
+## Understanding the Project
 
-Employee attrition is costly:
-- **Financial cost** of rehiring and onboarding
-- **Loss of organizational knowledge**
-- **Reduced morale and productivity**
+Employee attrition refers to employees leaving an organization over time. High attrition affects:
+- Organizational stability
+- Hiring & training costs
+- Team morale
+- Productivity and long-term planning
 
-The goal is not just to **predict** attrition, but to:
-> **Identify key drivers of turnover and support early retention interventions.**
-
----
-
-## 2. Dataset
-
-Dataset: *IBM HR Analytics Employee Attrition & Performance*  
-Units: All compensation is in **USD**, as per the original dataset.
-
-The dataset is **class-imbalanced**:
-- Majority: Employees who stay
-- Minority: Employees who leave (attrition = Yes)
-
-To address this, the model is trained using **SMOTE** to improve recall on the minority class.
+**Goal of this Dashboard:**  
+To estimate the likelihood that an employee may leave and to explain *why* that risk is high or low.
 
 ---
 
-## 3. Methodology
+## Key Capabilities
 
-### Preprocessing
-- Standardized feature names and encoding
-- Balanced minority class with **SMOTE**
-- Train-test split (stratified)
-
-### Model
-- **XGBoost classifier**, selected for interpretability and imbalanced-class performance
-- Evaluation focused on:
-  - **Recall on attrition class**
-  - Precision
-  - Accuracy
-
-### Key Performance Summary
-| Metric | Value | Interpretation |
-|-------|-------|----------------|
-| Recall (Attrition) | ~0.36 | The model captures ~36% of employees likely to leave |
-| Accuracy | ~0.82 | Good overall predictive stability |
-| Precision (Attrition) | Moderate | Balanced signaling of true risk vs false alarms |
+| Feature | What it Does | Why it Matters |
+|--------|--------------|----------------|
+| **Risk Prediction** | Calculates a percentage chance of attrition | Helps identify employees needing attention |
+| **Clear Explanations** | Provides plain-language reasons behind each prediction | Avoids black-box decisions |
+| **Salary Percentile Comparison** | Shows where employee salary stands relative to peers | Helps identify compensation-related dissatisfaction |
+| **Batch CSV Scoring** | Allows scoring multiple employees at once | Useful for organization-wide analysis |
+| **Model Card (Ethical Note)** | Explains model assumptions and cautions | Encourages responsible and fair usage |
 
 ---
 
-## 4. Application Overview
+## How the Model Works
 
-The Streamlit dashboard provides a **practical and research-oriented interface**:
+- The model is built using **XGBoost**, a widely used machine learning algorithm.
+- Class imbalance (few employees leave vs many who stay) is handled before training.
+- The model’s main focus is **recall** for detecting actual attrition cases.
+- To keep explanations transparent, the dashboard uses **clear rule-based interpretation** rather than opaque explainers.
 
-### **Tab 1 — Risk Prediction**
-- Enter key employee attributes (age, role, income, satisfaction, etc.)
-- Model returns **attrition probability (%)**
-- Risk categorized as:
-  - Very Low
-  - Moderate
-  - High
-  - Critical
-
-### **Tab 2 — Interpretation**
-A rule-based narrative explains *why* the risk level was assigned, using:
-
-- Income **percentile positioning within department**
-- Job satisfaction levels
-- Overtime workload signals
-- Tenure and role characteristics
-
-### **Tab 3 — Factor Comparisons**
-Visual summaries using original dataset distributions:
-- Attrition rate by job role
-- Income vs attrition patterns across departments
-
-### **Tab 4 — Batch Scoring (CSV)**
-Upload a CSV to score **multiple employees at once**, enabling:
-- Workforce-wide heatmaps
-- Retention prioritization
-
-### **Tab 5 — Model Card**
-Transparent documentation of:
-- Modeling assumptions
-- Limitations
-- Fair and responsible use guidelines
+This means the tool not only predicts **what** may happen, but also explains **why**.
 
 ---
 
-## 5. Ethical & Practical Use
+## Data Used
 
-This model is intended for:
-- Early **risk flagging**
-- Supporting **retention discussions**
+This project uses the **IBM HR Employee Attrition dataset**, a common open dataset used for HR analytics learning and research.
 
-It should *not* be used for:
-- Hiring or firing decisions
-- Automated personnel judgment
-
-### Responsible Use Recommendations
-- Always pair model output with **human review**
-- Maintain transparency with employees where appropriate
-- Monitor subgroup performance for fairness
+Values like salary are presented in **USD**, as in the original dataset.
 
 ---
 
-## 6. How to Run
+## Running Locally
 
 ```bash
+git clone <your-repo>
+cd employee-attrition-prediction
 pip install -r requirements.txt
-cd app
-streamlit run app.py
+streamlit run app/app.py
 ```
-
-(Optional) Place the training dataset at:
-```
-data/WA_Fn-UseC_-HR-Employee-Attrition.csv
-```
-to enable department benchmarking charts.
 
 ---
 
-## 7. Future Work
-- SHAP or IG-based causal interpretation (advanced explainability)
-- Time-based attrition forecasting
-- Intervention outcome tracking module
+## Project Structure
+
+```
+├── app
+│   ├── app.py
+│   ├── feature_names.pkl
+│   ├── label_encoder.pkl
+│   └── model.pkl
+├── data
+│   ├── archive
+│   ├── WA_Fn-UseC_-HR-Employee-Attrition.csv
+│   └── archive.zip
+├── notebooks
+│   └── 01_attrition_analysis_and_model.ipynb
+├── LICENSE
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## Ethical Use Disclaimer
+
+This application is intended for **learning, research, and HR decision support**, not for automated hiring or termination.
+
+Final decisions should always involve:
+- Human judgment
+- Contextual understanding
+- Transparent conversation with employees
 
 ---
 
 ## Author
-Md Ehtesham Ansari
 
-BS in Data Science & Applications (IIT Madras)
+**Md Ehtesham Ansari**  
+BS in Data Science & Applications — IIT Madras  
+
+---
+
+If you find this project useful, consider ⭐ starring the repository!
