@@ -25,8 +25,11 @@ h1, h2, h3, h4 { color:#0f172a; }
 """, unsafe_allow_html=True)
 
 # --------------- LOAD ARTIFACTS ---------------
-model = joblib.load("model.pkl")
-feature_names = joblib.load("feature_names.pkl")  # list of columns the model expects
+import os
+MODEL_DIR = os.path.dirname(__file__)
+model = joblib.load(os.path.join(MODEL_DIR, "model.pkl"))
+feature_names = joblib.load(os.path.join(MODEL_DIR, "feature_names.pkl"))
+
 
 # Try to load training CSV to compute medians & reference distributions (optional but recommended)
 def try_load_training_data():
