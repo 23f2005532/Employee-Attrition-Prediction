@@ -34,7 +34,7 @@ feature_names = joblib.load(os.path.join(MODEL_DIR, "feature_names.pkl"))
 # Try to load training CSV to compute medians & reference distributions (optional but recommended)
 def try_load_training_data():
     try:
-        df = pd.read_csv(os.path.join(MODEL_DIR, "data/WA_Fn-UseC_-HR-Employee-Attrition.csv"))
+        df = pd.read_csv(os.path.join(MODEL_DIR, "..", "data" ,"WA_Fn-UseC_-HR-Employee-Attrition.csv"))
         # standardize column names to match your training pipeline
         df.columns = df.columns.str.lower().str.replace(" ", "")
         return df
