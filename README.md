@@ -3,7 +3,7 @@
 
 This project provides an interactive dashboard to understand and predict employee attrition risk. 
 It is designed to support HR departments, managers, and organizational researchers in identifying 
-early signs of employee disengagement and turnover.
+early signs of employee disengagement and turnover..
 
 🔗 **Live App:**  
 https://employee-attrition-prediction-pdg6y4uxrqus3beemdt6ms.streamlit.app/
