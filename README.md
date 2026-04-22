@@ -57,7 +57,7 @@ Values like salary are presented in **USD**, as in the original dataset.
 ## Running Locally
 
 ```bash
-git clone <your-repo>
+git clone https://github.com/23f2005532/Employee-Attrition-Prediction
 cd employee-attrition-prediction
 pip install -r requirements.txt
 streamlit run app/app.py
